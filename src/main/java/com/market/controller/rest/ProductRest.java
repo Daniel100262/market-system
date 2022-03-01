@@ -3,6 +3,7 @@ package com.market.controller.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,5 +31,18 @@ public class ProductRest {
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body("Cadastrado com sucesso!");
 	}
+	
+	@PostMapping("/delete/{id}")
+	public ResponseEntity<String> deleteProduct(@PathVariable("id") Integer id){
+		
+		try {
+			productService.delete(id);
+		} catch (NullProductException e) {
+			ResponseEntity.status(HttpStatus.CREATED).body(e.getMessage());
+		}
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body("Produto deletado com sucesso!");
+	}
+	
 	
 }

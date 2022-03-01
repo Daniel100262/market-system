@@ -20,6 +20,15 @@ public class ProductService {
 			throw new NullProductException("Erro ao salvar o produto!");
 		}
 	}
+
+	public void delete(Integer id) {
+		if(productRepository.existsById(id)) {
+			productRepository.deleteById(id);
+		} else {
+			throw new NullProductException("O produto que você tentou remover não existe!");
+		}
+		
+	}
 	
 	
 }
