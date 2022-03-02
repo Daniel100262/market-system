@@ -1,16 +1,20 @@
 package com.market.controller.rest;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.market.NullProductException;
+import com.market.exceptions.NullProductException;
 import com.market.model.Product;
+import com.market.model.transport.ProductDTO;
 import com.market.service.ProductService;
 
 @RestController
@@ -42,6 +46,11 @@ public class ProductRest {
 		}
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body("Produto deletado com sucesso!");
+	}
+	
+	@GetMapping("/list-all")
+	public List<ProductDTO> listAllProducts() {
+		return productService.listAll();
 	}
 	
 	

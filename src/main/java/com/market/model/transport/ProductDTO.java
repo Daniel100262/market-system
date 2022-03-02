@@ -1,9 +1,15 @@
 package com.market.model.transport;
 
+import java.io.Serializable;
+import java.util.UUID;
+
 import com.market.model.Category;
 
-public class ProductDTO {
-private Integer id;
+public class ProductDTO implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+
+	private UUID id;
 	
 	private String name;
 	
@@ -13,7 +19,7 @@ private Integer id;
 	
 	private Category category;
 
-	public ProductDTO(Integer id, String name, String description, String price, Category category) {
+	public ProductDTO(UUID id, String name, String description, String price, Category category) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -22,11 +28,11 @@ private Integer id;
 		this.category = category;
 	}
 
-	public Integer getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

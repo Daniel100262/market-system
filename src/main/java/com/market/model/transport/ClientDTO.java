@@ -1,8 +1,12 @@
 package com.market.model.transport;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class ClientDTO {
+public class ClientDTO implements Serializable{
+ 
+	private static final long serialVersionUID = 1L;
+
 private Integer id;
 	
 	private String name;

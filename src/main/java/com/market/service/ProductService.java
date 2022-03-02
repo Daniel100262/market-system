@@ -1,10 +1,15 @@
 package com.market.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.market.NullProductException;
+import com.market.exceptions.NullProductException;
 import com.market.model.Product;
+import com.market.model.transport.ProductDTO;
 import com.market.repository.ProductRepository;
 
 @Service
@@ -29,6 +34,18 @@ public class ProductService {
 		}
 		
 	}
+
+	public List<ProductDTO> listAll() {
+		List<Product> products = productRepository.findAll();
+		List<ProductDTO> productsDTO = new ArrayList<>();
+
+		products.stream().forEach(product -> productsDTO.add(new ProductDTO(UUID.randomUUID(), product.getName(), product.getDescription(), product.getPrice(), product.getCategory())));
+		
+		return productsDTO;
+	}
+	
+	
+	
 	
 	
 }
