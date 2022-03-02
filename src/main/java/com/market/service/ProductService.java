@@ -60,6 +60,10 @@ public class ProductService {
 			throw new NullProductException("O produto que você tentou buscar não existe!");
 		}
 	}
+
+	public Product findMostExpensiveProduct() {
+		return productRepository.getMostExpansive();
+	}
 	
 	
 }

@@ -72,5 +72,10 @@ public class ProductRest {
 		return productService.findById(id);
 	}
 	
+	@GetMapping("/findMosExpensive")
+	public Product findMostExpensiveProduct() {
+		return productService.findMostExpensiveProduct();
+	}
+	
 	
 }
