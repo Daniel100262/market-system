@@ -43,6 +43,14 @@ public class ProductService {
 		
 		return productsDTO;
 	}
+
+	public void update(Integer id, Product product) {
+		if(productRepository.existsById(id)) {
+			productRepository.save(product);
+		} else {
+			throw new NullProductException("O produto que você tentou atualizar não existe!");
+		}
+	}
 	
 	
 	

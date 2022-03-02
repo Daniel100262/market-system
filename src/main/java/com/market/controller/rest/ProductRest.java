@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,15 +43,27 @@ public class ProductRest {
 		try {
 			productService.delete(id);
 		} catch (NullProductException e) {
-			ResponseEntity.status(HttpStatus.CREATED).body(e.getMessage());
+			ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 		
-		return ResponseEntity.status(HttpStatus.CREATED).body("Produto deletado com sucesso!");
+		return ResponseEntity.status(HttpStatus.OK).body("Produto deletado com sucesso!");
 	}
 	
 	@GetMapping("/list-all")
 	public List<ProductDTO> listAllProducts() {
 		return productService.listAll();
+	}
+	
+	@PatchMapping("/update/{id}")
+	public ResponseEntity<String> updateProduct(@PathVariable("id") Integer id, @RequestBody Product product){
+		
+		try {
+			productService.update(id, product);
+		} catch (NullProductException e) {
+			ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(e.getMessage());
+		}
+		
+		return ResponseEntity.status(HttpStatus.OK).body("Produto atualizado com sucesso!");
 	}
 	
 	
