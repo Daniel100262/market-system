@@ -1,6 +1,7 @@
 package com.market.model;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -33,6 +34,16 @@ public class Product implements Serializable {
 			inverseJoinColumns = @JoinColumn(name = "category_id")
 			)
 	private Category category;
+	
+	private UUID uuid;
+	
+	public UUID getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(UUID uuid) {
+		this.uuid = uuid;
+	}
 
 	public Integer getId() {
 		return id;

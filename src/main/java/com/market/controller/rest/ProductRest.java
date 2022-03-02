@@ -1,6 +1,7 @@
 package com.market.controller.rest;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,7 +56,7 @@ public class ProductRest {
 	}
 	
 	@PatchMapping("/update/{id}")
-	public ResponseEntity<String> updateProduct(@PathVariable("id") Integer id, @RequestBody Product product){
+	public ResponseEntity<String> updateProduct(@PathVariable("id") UUID id, @RequestBody Product product){
 		
 		try {
 			productService.update(id, product);
@@ -64,6 +65,11 @@ public class ProductRest {
 		}
 		
 		return ResponseEntity.status(HttpStatus.OK).body("Produto atualizado com sucesso!");
+	}
+	
+	@GetMapping("/find/{id}")
+	public Product findByUUID(@PathVariable("id") UUID id) {
+		return productService.findById(id);
 	}
 	
 	

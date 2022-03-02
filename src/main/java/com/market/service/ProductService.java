@@ -44,8 +44,8 @@ public class ProductService {
 		return productsDTO;
 	}
 
-	public void update(Integer id, Product product) {
-		if(productRepository.existsById(id)) {
+	public void update(UUID id, Product product) {
+		if(productRepository.findByUuid(id) != null) {
 			productRepository.save(product);
 		} else {
 			throw new NullProductException("O produto que você tentou atualizar não existe!");
@@ -53,7 +53,13 @@ public class ProductService {
 	}
 	
 	
-	
+	public Product findById(UUID id) {
+		if(productRepository.findByUuid(id) != null) {
+			return productRepository.findByUuid(id).get(0);
+		} else {
+			throw new NullProductException("O produto que você tentou buscar não existe!");
+		}
+	}
 	
 	
 }
